@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# code BY: Emil_Nabil
+# code BY: MOHAMED_OS
 
 from __future__ import print_function
 
 from os import chdir, chmod, popen, remove, system
 from os.path import exists, isfile, join
 from re import MULTILINE, findall
-from socket import gethostname
 from sys import version_info
 from time import sleep
 
@@ -36,7 +35,6 @@ class Emulator():
     page = "https://github.com/emil237/Cam_Emulator"
 
     def __init__(self):
-        self.hostname = gethostname()
         self.package = 'enigma2-plugin-softcams-'
 
     def Stb_Image(self):
@@ -70,8 +68,15 @@ class Emulator():
             print('URL Error: ', e.reason)
 
     def banner(self):
-        system('clear')    
-      print("".join(["\t\t\t{}Oscam Version{}: ".format(Y, C), self.info('oscam')]))
+        system('clear')
+        print(B,r"""
+            d88888b .88b  d88. db    db db       .d8b.  d888888b  .d88b.  d8888b.
+            88'     88'YbdP`88 88    88 88      d8' `8b `~~88~~' .8P  Y8. 88  `8D
+            88ooooo 88  88  88 88    88 88      88ooo88    88    88    88 88oobY'
+            88~~~~~ 88  88  88 88    88 88      88~~~88    88    88    88 88`8b
+            88.     88  88  88 88b  d88 88booo. 88   88    88    `8b  d8' 88 `88.
+            Y88888P YP  YP  YP ~Y8888P' Y88888P YP   YP    YP     `Y88P'  88   YD""", C)
+        print("".join(["\t\t\t{}Oscam Version{}: ".format(Y, C), self.info('oscam')]))
         print("".join(["\t\t\t{}Ncam Version{}: ".format(Y, C), self.info('ncam')]))
 
     def check(self, pkg):
@@ -219,10 +224,6 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
 
                 chdir('/tmp')
 
-                if "oscam" in value:
-                    if self.hostname in ['novaler4k', 'novaler4kse', 'novaler4kpro','multibox', 'multiboxse', 'multiboxpro']:
-                        self.file.replace("oscam","oscam-nova")
-
                 if "powercam" in value or "ultracam" in value:
                     CheckLib = popen(" ".join([self.list, 'libcrypto-compat-1.0.0'])).read().split(' - ')[0]
                     if CheckLib == 'libcrypto-compat-1.0.0':
@@ -248,13 +249,8 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
                 if "supcam" in value:
                     self.FixEmu()
 
-                stb_image = popen("cut /etc/opkg/all-feed.conf -d'-' -f1 | awk '{ print $2 }'").read().replace("\n","")
-                if stb_image == "openpli":
-                    system(" ".join([self.install, "softcam-support"]))
-                    sleep(1)
-
 
 if __name__ == '__main__':
     build = Emulator()
     build.main()
-    print("   Written by {}Emil_Nabil{} (͡๏̯͡๏)".format(R, C))
+    print("   Written by {}MOHAMED_OS{} (͡๏̯͡๏)".format(R, C))
