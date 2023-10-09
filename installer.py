@@ -31,8 +31,8 @@ if hasattr(__builtins__, 'raw_input'):
 
 
 class Emulator():
-    URL = 'https://raw.githubusercontent.com/emil237/Cam_Emulator/main/'
-    page = "https://github.com/emil237/Cam_Emulator"
+    URL = 'https://raw.githubusercontent.com/MOHAMED19OS/Enigma2_Store/main/Cam_Emulator/'
+    page = "https://github.com/MOHAMED19OS/Enigma2_Store/tree/main/Cam_Emulator"
 
     def __init__(self):
         self.package = 'enigma2-plugin-softcams-'
