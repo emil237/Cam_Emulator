@@ -61,7 +61,7 @@ class Emulator():
                 'User-Agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0')
             response = urlopen(req)
             link = response.read().decode('utf-8')
-            return findall(r"".join(['Emu/.+?-', name, '_(.*?)_']), link)[0]
+            return findall(r"".join(['Cam_Emulator/.+?-', name, '_(.*?)_']), link)[0]
         except HTTPError as e:
             print('HTTP Error code: ', e.code)
         except URLError as e:
@@ -69,18 +69,15 @@ class Emulator():
 
     def banner(self):
         system('clear')
-        print(B,
-              r"""
+        print(B,r"""
             d88888b .88b  d88. db    db db       .d8b.  d888888b  .d88b.  d8888b.
             88'     88'YbdP`88 88    88 88      d8' `8b `~~88~~' .8P  Y8. 88  `8D
             88ooooo 88  88  88 88    88 88      88ooo88    88    88    88 88oobY'
             88~~~~~ 88  88  88 88    88 88      88~~~88    88    88    88 88`8b
             88.     88  88  88 88b  d88 88booo. 88   88    88    `8b  d8' 88 `88.
             Y88888P YP  YP  YP ~Y8888P' Y88888P YP   YP    YP     `Y88P'  88   YD""", C)
-        print(
-            "".join(["\t\t\t{}Oscam Version{}: ".format(Y, C), self.info('oscam')]))
-        print(
-            "".join(["\t\t\t{}Ncam Version{}: ".format(Y, C), self.info('ncam')]))
+        print("".join(["\t\t\t{}Oscam Version{}: ".format(Y, C), self.info('oscam')]))
+        print("".join(["\t\t\t{}Ncam Version{}: ".format(Y, C), self.info('ncam')]))
 
     def check(self, pkg):
         with open(self.status) as file:
@@ -96,14 +93,12 @@ class Emulator():
         options.sort(key=int)
 
         while True:
-            print(
-                "{}(?){} Choose an option [{}-{}] : ".format(B, C, options[0], options[-1]), end='')
+            print("{}(?){} Choose an option [{}-{}] : ".format(B, C, options[0], options[-1]), end='')
             choice = [str(x) for x in input().split()]
 
             for name in choice:
                 if name not in options:
-                    print(
-                        "\n{}(!){} Select one of the available options !!\n".format(R, C))
+                    print("\n{}(!){} Select one of the available options !!\n".format(R, C))
                     continue
             return choice
 
@@ -161,8 +156,7 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
 
         if not self.check('libcurl4'):
             system('clear')
-            print("   >>>>   {}Please Wait{} while we Install {}libcurl4{} ...".format(
-                G, C, Y, C))
+            print("   >>>>   {}Please Wait{} while we Install {}libcurl4{} ...".format(G, C, Y, C))
             system('{};{} libcurl4'.format(self.update, self.install))
 
         if self.Stb_Image():
@@ -170,39 +164,40 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
                 "1": "".join([self.package, "oscam"]),
                 "2": "".join([self.package, "ncam"]),
                 "3": "".join([self.package, "powercam"]),
-                "4": "".join([self.package, "revcam"]),
-                "5": "".join([self.package, "gosatplus"]),
-                "6": "".join([self.package, "supcam-oscam"]),
-                "7": "".join([self.package, "revcam-oscam"]),
-                "8": "".join([self.package, "gosatplus-oscam"]),
-                "9": "".join([self.package, "powercam-oscam"]),
-                "10": "".join([self.package, "supcam-ncam"]),
+                "4": "".join([self.package, "gosatplus"]),
+                "5": "".join([self.package, "ultracam"]),
+                "6": "".join([self.package, "gosatplus-oscam"]),
+                "7": "".join([self.package, "powercam-oscam"]),
+                "8": "".join([self.package, "ultracam-oscam"]),
+                "9": "".join([self.package, "supcam-oscam"]),
+                "10": "".join([self.package, "gosatplus-ncam"]),
                 "11": "".join([self.package, "powercam-ncam"]),
-                "12": "".join([self.package, "revcam-ncam"]),
-                "13": "".join([self.package, "gosatplus-ncam"])
+                "12": "".join([self.package, "ultracam-ncam"]),
+                "13": "".join([self.package, "supcam-ncam"])
             }
             menu = """
-                                (00) Exit
+                        (00) Exit
 
-            (1) Oscam       (6)  SupTV_Oscam        (11) PowerCam_Ncam
-            (2) Ncam        (7)  Revcam_Oscam       (12) Revcam_Ncam
-            (3) PowerCam    (8)  GosatPlus_Oscam    (13) GosatPlus_Ncam
-            (4) Revcam      (9)  PowerCam_Oscam
-            (5) GosatPlus   (10) SupTV_Ncam
+            (1) Oscam               (8)  UltraCam_Oscam
+            (2) Ncam                (9)  SupTV_Oscam
+            (3) PowerCam            (10) GosatPlus_Ncam
+            (4) GosatPlus           (11) PowerCam_Ncam
+            (5) UltraCam            (12) UltraCam_Oscam
+            (6) GosatPlus_Oscam     (13) SupTV_Ncam
+            (7) PowerCam_Oscam
             """
         else:
             cam = {
                 "1": "".join([self.package, "oscam"]),
                 "2": "".join([self.package, "ncam"]),
-                "3": "".join([self.package, "revcam"]),
-                "4": "".join([self.package, "powercam"]),
-                "5": "".join([self.package, "gosatplus"])
+                "3": "".join([self.package, "powercam"]),
+                "4": "".join([self.package, "gosatplus"])
             }
             menu = """
                             (00) Exit
 
-            (1) Oscam          (2) Ncam          (3) Revcam
-            (4) PowerCam       (5) GosatPlus
+            (1) Oscam       (3) PowerCam
+            (2) Ncam        (4) GosatPlus
             """
         self.banner()
 
@@ -218,8 +213,7 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
                 exit()
             else:
                 value = cam.get(number)
-                self.file = "{}_{}_all.{}".format(
-                    value, self.info(value.split('-')[-1]), self.extension)
+                self.file = "{}_{}_all.{}".format(value, self.info(value.split('-')[-1]), self.extension)
 
                 if self.check(value):
                     system('{} {} '.format(self.uninstall, value))
@@ -230,33 +224,17 @@ sed -i '/SUPAUTO/d' {}\n""".format(self.RootPath, self.RootPath))
 
                 chdir('/tmp')
 
-                if self.Stb_Image():
-                    UrlSsl = "".join(
-                        [self.URL[:46], 'OpenSsl_IPK/main/OE2.0/'])
-                    FileSsl = "libcrypto1.0.0_1.0.2_all.ipk"
-                else:
-                    UrlSsl = "".join(
-                        [self.URL[:46], 'OpenSsl_IPK/main/OE2.6/'])
-                    FileSsl = "libcrypto1.0.0_1.0.2h-r0.0_all.deb"
-
-                if "powercam" in value:
-                    CheckLib = popen(
-                        " ".join([self.list, 'libcrypto-compat-1.0.0'])).read().split(' - ')[0]
+                if "powercam" in value or "ultracam" in value:
+                    CheckLib = popen(" ".join([self.list, 'libcrypto-compat-1.0.0'])).read().split(' - ')[0]
                     if CheckLib == 'libcrypto-compat-1.0.0':
                         if not self.check('libcrypto-compat-1.0.0'):
                             system('clear')
-                            print(
-                                "   >>>>   {}Please Wait{} while we Install {}libcrypto-compat-1.0.0{} ...".format(G, C, Y, C))
-                            system(
-                                '{};{} libcrypto-compat-1.0.0'.format(self.update, self.install))
+                            print("   >>>>   {}Please Wait{} while we Install {}libcrypto-compat-1.0.0{} ...".format(G, C, Y, C))
+                            system('{};{} libcrypto-compat-1.0.0'.format(self.update, self.install))
                     else:
-                        if not self.check(FileSsl.split('_')[0]):
-                            print(
-                                "   >>>>   {}Please Wait{} while we Install {}{}{} ...".format(G, C, Y, FileSsl.split('_')[0], C))
-                            urlretrieve(
-                                "".join([UrlSsl, FileSsl]), filename=FileSsl)
-                            system(" ".join([self.install, FileSsl]))
-                            remove(FileSsl)
+                        if not self.check('libcrypto-compat'):
+                            print("   >>>>   {}Please Wait{} while we Install {}libcrypto-compat{} ...".format(G, C, Y, C))
+                            system(" ".join([self.install, "libcrypto-compat"]))
 
                 system('clear')
                 print("{}Please Wait{} while we Download And Install {}{}{} ...".format(
